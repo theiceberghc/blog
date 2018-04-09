@@ -8,15 +8,16 @@ import { rhythm } from '../utils/typography'
 
 class BlogIndex extends React.Component {
   render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const posts = get(this, 'props.data.allMarkdownRemark.edges')
+    const siteTitle = get(this, 'props.data.site.siteMetadata.title');
+    const posts = get(this, 'props.data.allMarkdownRemark.edges');
 
     return (
       <div>
         <Helmet title={siteTitle} />
-        <Bio />
+        { /* <Bio /> */ }
         {posts.map(({ node }) => {
-          const title = get(node, 'frontmatter.title') || node.fields.slug
+          const title = get(node, 'frontmatter.title') || node.fields.slug;
+
           return (
             <div key={node.fields.slug}>
               <h3
@@ -31,14 +32,14 @@ class BlogIndex extends React.Component {
               <small>{node.frontmatter.date}</small>
               <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
             </div>
-          )
+          );
         })}
       </div>
-    )
+    );
   }
 }
 
-export default BlogIndex
+export default BlogIndex;
 
 export const pageQuery = graphql`
   query IndexQuery {
@@ -62,4 +63,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
